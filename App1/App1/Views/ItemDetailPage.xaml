@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App1.Views.ItemDetailPage"
+             xmlns:richtexteditor="clr-namespace:Syncfusion.XForms.RichTextEditor;assembly=Syncfusion.SfRichTextEditor.XForms"
+
+             Title="{Binding Title}">
+
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Название:" FontSize="Medium" />
+                <Label Text="{Binding Name}" FontSize="Small"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Категория:" FontSize="Medium" />
+                <Label Text="{Binding Category}" FontSize="Small"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Тип:" FontSize="Medium" />
+                <Label Text="{Binding Type}" FontSize="Small"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Имя кухни:" FontSize="Medium" />
+                <Label Text="{Binding NameKitchen}" FontSize="Small"/>
+            </StackLayout>
+            <richtexteditor:SfRichTextEditor VerticalOptions="FillAndExpand" ReadOnly="True"  ShowToolbar="False"  HtmlText="{Binding HTMLText}" />
+        </StackLayout>
+    </ScrollView>
+    
+    
+</ContentPage>

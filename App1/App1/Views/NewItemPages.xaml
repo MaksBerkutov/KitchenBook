@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+              xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Shell.PresentationMode="ModalAnimated"
+             Title="New Item"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+                          xmlns:richtexteditor="clr-namespace:Syncfusion.XForms.RichTextEditor;assembly=Syncfusion.SfRichTextEditor.XForms"
+
+             x:Class="App1.Views.NewItemPages">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="3" Padding="15">
+                
+                <Entry Placeholder="Название блюда" Text="{Binding Name}" TextColor="White"/>
+                <Entry Placeholder="Категория" Text="{Binding Category}" TextColor="White"/>
+                <Entry Placeholder="Тип блюда" Text="{Binding Type}" TextColor="White"/>
+                <Entry Placeholder="Имя кухни" Text="{Binding NameKitchen}" TextColor="White"/>
+                <richtexteditor:SfRichTextEditor x:Name="RTE" ImageInserted="RTE_ImageInserted" VerticalOptions="FillAndExpand" ToolbarPosition="Bottom" HtmlText="{Binding HTMLText}" ImageInsertCommand="{Binding ImageInsertCommand}" />
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+                    <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+
+    </ContentPage.Content>
+</ContentPage>
