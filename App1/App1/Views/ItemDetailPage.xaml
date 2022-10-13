@@ -25,6 +25,10 @@
                 <Label Text="{Binding NameKitchen}" FontSize="Small"/>
             </StackLayout>
             <richtexteditor:SfRichTextEditor VerticalOptions="FillAndExpand" ReadOnly="True"  ShowToolbar="False"  HtmlText="{Binding HTMLText}" />
+            <StackLayout Orientation="Horizontal">
+                <Picker Title="Тип файла" ItemsSource="{Binding Types}" SelectedItem="{Binding SelectedType, Mode=TwoWay}"/>
+                <Button Text="Save" Command="{Binding SaveCommand}"/>
+            </StackLayout>
         </StackLayout>
     </ScrollView>
     

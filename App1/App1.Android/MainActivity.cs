@@ -41,7 +41,6 @@ namespace App1.Droid
                     Android.Net.Uri uri = intent.Data;
                     Stream stream = ContentResolver.OpenInputStream(uri);
 
-                    // Set the Stream as the completion of the Task
                     PickImageTaskCompletionSource.SetResult(stream);
                 }
                 else

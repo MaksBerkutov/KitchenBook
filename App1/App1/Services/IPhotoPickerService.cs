@@ -6,5 +6,6 @@ namespace App1.Services
     public interface IPhotoPickerService
     {
         Task<Stream> GetImageStreamAsync();
+        Task<Stream> SaveFileAsync(string text);
     }
 }

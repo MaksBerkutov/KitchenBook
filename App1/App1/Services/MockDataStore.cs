@@ -41,8 +41,9 @@ namespace App1.Services
         public async Task<bool> DeleteItemAsync(string id)
         {
             var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(oldItem);
             await Task.Run(() => { MySql.MySql.DeleteDateAsync(oldItem.Id); });
+            items.Remove(oldItem);
+           
             return await Task.FromResult(true);
         }
 

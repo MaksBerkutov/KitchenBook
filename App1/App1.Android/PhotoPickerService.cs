@@ -24,16 +24,14 @@ namespace Sample.Droid
                 intent.SetType("image/*");
                 intent.SetAction(Intent.ActionGetContent);
 
-                // Start the picture-picker activity (resumes in MainActivity.cs)
 
                 MainActivity i = (MainActivity.Instance as MainActivity); i.StartActivityForResult(
                     Intent.CreateChooser(intent, "Select Picture"),
                     MainActivity.PickImageIds);
 
-                // Save the TaskCompletionSource object as a MainActivity property
                 i.PickImageTaskCompletionSource = new TaskCompletionSource<Stream>();
-
-                // Return Task object
+              
+                
                 return i.PickImageTaskCompletionSource.Task;
             }
             catch (System.Exception)
@@ -42,8 +40,34 @@ namespace Sample.Droid
                 
             }
             return null;
-            // Define the Intent for getting images
            
         }
+        public Task<Stream> SaveFileAsync(string text)
+        {
+            try
+            {
+                Intent intent = new Intent();
+                intent.SetType("application/*");
+                intent.SetAction(Intent.ActionCreateDocument);
+
+
+                MainActivity i = (MainActivity.Instance as MainActivity); i.StartActivityForResult(
+                    Intent.CreateChooser(intent, "Save File"),
+                    MainActivity.PickImageIds);
+
+                i.PickImageTaskCompletionSource = new TaskCompletionSource<Stream>();
+
+
+                return i.PickImageTaskCompletionSource.Task;
+            }
+            catch (System.Exception)
+            {
+
+
+            }
+            return null;
+
+        }
+
     }
 }

@@ -10,6 +10,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
         <ToolbarItem Text="Delete" Command="{Binding DeleteItemCommand}" />
+        <ToolbarItem Text="{Binding EDIT}" Command="{Binding EditModeCommand}" />
     </ContentPage.ToolbarItems>
     
     <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">

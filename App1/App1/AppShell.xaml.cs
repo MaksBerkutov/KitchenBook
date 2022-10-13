@@ -12,13 +12,14 @@ namespace App1
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
+            Routing.RegisterRoute(nameof(EditPage), typeof(EditPage));
             Routing.RegisterRoute(nameof(NewItemPages), typeof(NewItemPages));
             Routing.RegisterRoute(nameof(DeleteItemPage), typeof(DeleteItemPage));
+            Routing.RegisterRoute(nameof(FindPage), typeof(FindPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync("//LoginPage");
         }
     }
 }

@@ -44,7 +44,7 @@ namespace App1.Services.MySql
             MySqlConnection conn = new MySqlConnection(
              ConString.ConnectionString);
             conn.Open();
-            string com = $"UPDATE items Name='{Item.Name}', Category='{Item.Category}', Type='{Item.Type}', NameKitchen='{Item.NameKitchen}', HTMLText='{Item.HTMLText}' WHERE ID='{Item.Id}'";
+            string com = $"UPDATE items Name='{Item.Name}', Category='{Item.Category}', Type='{Item.Type}', NameKitchen='{Item.NameKitchen}', HTMLText='{Item.HTMLText}' WHERE ID='{UID}'";
             MySqlCommand command = new MySqlCommand(com, conn);
             command.ExecuteNonQuery();
             command.Clone();
@@ -54,7 +54,7 @@ namespace App1.Services.MySql
             MySqlConnection conn = new MySqlConnection(
                  ConString.ConnectionString);
             conn.Open();
-            string com = $"DELETE  FROM items WHERE ID='UID'";
+            string com = $"DELETE  FROM items WHERE ID='{UID}'";
             MySqlCommand command = new MySqlCommand(com, conn);
             command.ExecuteNonQuery();
             command.Clone();
@@ -94,7 +94,7 @@ namespace App1.Services.MySql
             MySqlConnection conn = new MySqlConnection(
              ConString.ConnectionString);
             await conn.OpenAsync();
-            string com = $"UPDATE items Name='{Item.Name}', Category='{Item.Category}', Type='{Item.Type}', NameKitchen='{Item.NameKitchen}', HTMLText='{Item.HTMLText}' WHERE ID='{Item.Id}'";
+            string com = $"UPDATE items SET Name='{Item.Name}', Category='{Item.Category}', Type='{Item.Type}', NameKitchen='{Item.NameKitchen}', HTMLText='{Item.HTMLText}' WHERE ID='{UID}'";
             MySqlCommand command = new MySqlCommand(com, conn);
             command.ExecuteNonQuery();
             command.Clone();
@@ -117,7 +117,7 @@ namespace App1.Services.MySql
             MySqlConnection conn = new MySqlConnection(
              ConString.ConnectionString);
             await conn.OpenAsync();
-            string com = $"DELETE  FROM items WHERE ID='UID'";
+            string com = $"DELETE  FROM items WHERE ID='{UID}'";
             MySqlCommand command = new MySqlCommand(com, conn);
             command.ExecuteNonQuery();
             command.Clone();

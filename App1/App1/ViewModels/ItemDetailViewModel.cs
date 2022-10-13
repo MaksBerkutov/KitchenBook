@@ -1,6 +1,9 @@
 ﻿using App1.Models;
+using App1.Services;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -9,6 +12,47 @@ namespace App1.ViewModels
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class ItemDetailViewModel : BaseViewModel
     {
+        private object _selctedType;
+        public List<string> types = new List<string>() { "DOC", "DOCX" } ;
+        public List<string> Types { get => types; }
+        public Command SaveCommand { get; }
+        private bool ValidSave() => (_selctedType as string) != null&& (_selctedType as string).Length>0;
+        public ItemDetailViewModel()
+        {
+            SaveCommand = new Command(OnSave, ValidSave);
+            this.PropertyChanged +=
+                (_, __) => SaveCommand.ChangeCanExecute();
+        }
+        public object SelectedType
+        {
+            get => _selctedType;
+            set
+            {
+                SetProperty(ref _selctedType, value);
+            }
+        }
+
+        private string BuildHtml() =>
+            $"<p align=\"center \">Имя кухни: {name}</p>" +
+            $"<p align=\"center \">Категроия: {category}</p>" +
+            $"<p align=\"center \">Тип блюда: {type}</p>" +
+            $"<p align=\"center \">Имя кухни: {nameKitchen}</p>" 
+            +$"{hTMLText}";
+        private async void OnSave()
+        {
+            if (_selctedType == null)
+                return;
+            string item = _selctedType as string;
+            Stream SaveStream = await DependencyService.Get<IPhotoPickerService>().SaveFileAsync(item);
+            switch (item)
+            {
+                case "DOC": Services.Converter.HtmlToWords(BuildHtml(), SaveStream); break;
+                case "DOCX": Services.Converter.HtmlToWord(BuildHtml(), SaveStream); break;
+            }
+           
+          
+
+        }
         private string itemId;
         private string name;
         private string category;

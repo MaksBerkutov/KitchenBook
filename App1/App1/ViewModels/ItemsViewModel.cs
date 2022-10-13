@@ -12,11 +12,14 @@ namespace App1.ViewModels
 
     {
         private Item _selectedItem;
-
+        private string editT = "EditMode: OFF";
+        public string EDIT { get => editT; set => SetProperty(ref editT, value); }
+        private bool edit = false;
         public ObservableCollection<Item> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
         public Command DeleteItemCommand { get; }
+        public Command EditModeCommand { get; }
         public Command<Item> ItemTapped { get; }
 
         public ItemsViewModel()
@@ -29,8 +32,16 @@ namespace App1.ViewModels
 
             AddItemCommand = new Command(OnAddItem);
             DeleteItemCommand = new Command(OnDeleteItem);
+            EditModeCommand = new Command(OnEdit);
         }
-
+        private async void OnEdit(object obj)
+        {
+            edit = !edit;
+            if (edit)
+                EDIT = "EditMode: ON";
+            else
+                EDIT = "EditMode: OFF";
+        }
         async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
@@ -78,13 +89,16 @@ namespace App1.ViewModels
         {
             await Shell.Current.GoToAsync(nameof(DeleteItemPage));
         }
-
+                
         async void OnItemSelected(Item item)
         {
             if (item == null)
                 return;
+            if(edit)
+                await Shell.Current.GoToAsync($"{nameof(EditPage)}?{nameof(EditViewModel.ItemId)}={item.Id}");
+            else
+                await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
 
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
         }
     }
 }

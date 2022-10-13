@@ -8,6 +8,7 @@ using Windows.Storage.Pickers;
 using Xamarin.Forms;
 using Windows.Storage.Streams;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 [assembly: Dependency(typeof(PhotoPickerService))]
 namespace App1.UWP
@@ -18,7 +19,6 @@ namespace App1.UWP
         
         public async Task<Stream> GetImageStreamAsync()
         {
-            // Create and initialize the FileOpenPicker
            FileOpenPicker openPicker = new FileOpenPicker
             {
                 ViewMode = PickerViewMode.Thumbnail,
@@ -29,7 +29,6 @@ namespace App1.UWP
             openPicker.FileTypeFilter.Add(".jpeg");
             openPicker.FileTypeFilter.Add(".png");
             StorageFile storageFile = storageFile = await openPicker.PickSingleFileAsync();
-            // Get a file and return a Stream
            
 
             if (storageFile == null)
@@ -38,8 +37,26 @@ namespace App1.UWP
             }
 
             IRandomAccessStreamWithContentType raStream = await storageFile.OpenReadAsync();
-            //(RTE_Localization.App.Current.BindingContext as ViewModel).Stream1 = raStream.AsStream();
             return raStream.AsStream();
+        }
+        public async Task<Stream> SaveFileAsync(string text)
+        {
+            FileSavePicker SavePicker = new FileSavePicker()
+            {
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary,
+                SuggestedFileName = "New Document",
+            }; SavePicker.FileTypeChoices.Add("save", new List<string>() { $".{text.ToLower()}" });
+
+            StorageFile storageFile = storageFile = await SavePicker.PickSaveFileAsync();
+
+
+            if (storageFile == null)
+            {
+                return null;
+            }
+            var result = storageFile.OpenStreamForWriteAsync();
+
+            return result.Result; 
         }
     }
 }

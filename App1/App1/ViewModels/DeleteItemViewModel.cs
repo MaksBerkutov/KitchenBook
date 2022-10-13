@@ -71,9 +71,7 @@ namespace App1.ViewModels
                 OnItemSelected(value);
             }
         }
-
        
-
         async void OnItemSelected(Item item)
         {
             if (item == null)
